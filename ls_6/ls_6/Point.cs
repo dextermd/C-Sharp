@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ls_6
 {
-    internal class Point
+    public class Point
     {
         private int x; // Поле
         public int X  // Свойство
@@ -40,5 +40,6 @@ namespace ls_6
             //return base.ToString();
             return $"[{X};{Y}]";
         }
+
     }
 }
