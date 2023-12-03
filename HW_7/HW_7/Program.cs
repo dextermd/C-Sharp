@@ -10,7 +10,7 @@ namespace HW_7
     {
         static void Main(string[] args)
         {
-#if true
+#if false
             //Задание 1: Реализуйте класс, описывающий студента.Предусмотреть в нем следующие моменты:
             //    − фамилия,
             //    − имя,
@@ -33,12 +33,21 @@ namespace HW_7
             Console.WriteLine();
 
             student = student2;
-            Console.WriteLine(student);
-            Console.WriteLine($"Grades: {}");
+            student.SetGrade(1, 1, 6);
+            Console.WriteLine($"Оценки: {student.GetStringGrades()}");
+            Console.WriteLine($"Возраст: {student.Age}");
+            Console.WriteLine($"Grades Average: {student.GetGradeAverage():F}");
+
+            Console.WriteLine();
+
+            Student studentInit = new Student();
+            studentInit.Init();
+            Console.WriteLine();
+            Console.WriteLine(studentInit);
 
 #endif
 
-#if true
+#if false
             //Задание 2: На основе класса из Задания 1 реализуйте класс, описывающий студента(версия 2).
             //Предусмотреть в нем следующие моменты:
             //    − фамилия,
@@ -47,19 +56,60 @@ namespace HW_7
             //    − наименование Вуза,
             //    − группа,
             //    − массив(зубчатый) оценок по программированию, администрированию и дизайну.
+
             //А также реализуйте инструменты по работе с перечисленными данными: возможность
             //установки / получения оценок(оценки), получение среднего балла по заданному предмету, вывод
             //данных о студенте на экран, ввод данных с клавиатуры.
+
             //Реализуйте вычисляемое свойство для определения возраста студента на основе даты его
             //рождения.
-            //Примечание: В обоих заданиях продемонстрируйте работу класса на примерах. В том числе:
-            //            объявить и проинициализировать экземпляры класса на этапе разработки с использованием
-            //конструктора и списка инициализации. При необходимости осуществлять проверку ссылочных
-            //типов на null.
 
+            StudentTwo student = new StudentTwo();
+            Console.WriteLine(student);
+
+            Console.WriteLine();
+
+            int[][] grades = new int[][]
+            {
+                new int[] { 5, 8, 7, 100 },
+                new int[] { 6, 88,9, 8, 7 },
+                new int[] { 200 }
+            };
+            StudentTwo student2 = new StudentTwo("Dvornicov", "Ruslan", "26.10.1990", "StepIT", grades);
+            Console.WriteLine(student2);
+            Console.WriteLine($"Лет: {StudentTwo.GetAge()}");
+            student2.ShowGrades();
+
+            double[] avg = new double[] { };
+            avg = student2.GetGradeAverage();
+            for (int i = 0; i < avg.Length; i++)
+            {
+                Console.Write($"Оценки по {StudentTwo.GetSubjectName(i)}: {avg[i]:F}\n");
+            }
+
+            int[][] newGr = new int[][]
+            {
+                new int[] { 1, 1, 1, 100 },
+                new int[] { 1, 88,1,1, 1 },
+                new int[] { 200, 1}
+            };
+            student2.SetGrade(newGr);
+            student2.ShowGrades();
+
+            Console.WriteLine();
+
+            StudentTwo student3 = new StudentTwo();
+            student3 = student2;
+            Console.WriteLine(student3);
+            Console.WriteLine($"Оценки по {StudentTwo.GetSubjectName(1)}: {student3.GetAverageBySubject(1)}");
+
+            Console.WriteLine();
+
+            StudentTwo studentInit = new StudentTwo();
+            studentInit.Init();
+            Console.WriteLine();
+            Console.WriteLine(studentInit);
 #endif
-
-
             Console.ReadLine();
         }
     }

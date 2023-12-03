@@ -20,7 +20,6 @@ namespace HW_7
         public string Surname { get => surname; }
         public string Name { get => name; }
         public int Age { get => age; }
-        // public static void Grages { } 
 
         public Student() : this("No Surname", "No Name", "No Group", 00, null){ }
         public Student(in string surname, in string name, in string group, in int age, params int[] grades)
@@ -39,7 +38,6 @@ namespace HW_7
             age = obj.age;
             grades = obj.grades;
         }
-
         public string GetStringGrades()
         {
             if (grades != null) {
@@ -62,6 +60,42 @@ namespace HW_7
                    $"Group  : {group}\n" +
                    $"Age    : {age}\n" +
                    $"Grades : {GetStringGrades()}";
+        }
+        public void SetGrade(params int[] grade)
+        {
+            int[] tmp = new int[grades.Length + grade.Length];
+            tmp = grades.Concat(grade).ToArray();
+            grades = tmp;
+        }
+        public void Init() 
+        {
+            bool isInt = false;
+            int[] gr;
+
+            Console.WriteLine("Введите студента!");
+            Console.Write("Фамилия: ");
+            surname = Console.ReadLine();
+            Console.Write("Имя: ");
+            name = Console.ReadLine();
+            Console.Write("Группа: ");
+            group = Console.ReadLine();
+            do
+            {
+                Console.Write("Возраст: ");
+                isInt = int.TryParse(Console.ReadLine(), out age);
+            } while (!isInt);
+
+            Console.Write("Введите оценки: ");
+            string strGr = Console.ReadLine();
+            string[] strGrArr = strGr.Split(" .,".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            gr = new int[strGrArr.Length];
+            for (int i = 0; i < strGrArr.Length; i++)
+            {
+                gr[i] = int.Parse(strGrArr[i]);
+            }
+
+            grades = gr?.Where(n => n < 13 && n > 0).ToArray() ?? new int[0];
         }
     }
 }
