@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.NetworkInformation;
@@ -68,7 +69,7 @@ namespace HW_8
             }
 #endif
 
-#if true
+#if false
             /*
                 Задание 3: Пользователь вводит в строку с клавиатуры логическое выражение. Например, 3>2 или
                 7<3. Программа должна посчитать результат введенного выражения и дать результат true или
@@ -77,27 +78,35 @@ namespace HW_8
             */
 
             Console.Write("Введите логическое выражение: ");
-            string input = Console.ReadLine();
-            char[] tmp = input.Where(c => !char.IsDigit(c)).ToArray();
-            char[] numbers = input.Where(c => !char.IsDigit(c)).ToArray();
-            string oper = new string(tmp);
-            Console.WriteLine(oper);
-            
+            string input = Console.ReadLine().Replace(" ", "");
 
-            
             try
-            { 
-
-                //Console.WriteLine($"{result}");
-            }
-            catch (FormatException exc)
             {
-                //Console.WriteLine(exc.Message);
-            }
+                char[] tmp = input.Where(c => !char.IsDigit(c)).ToArray();
+                string oper = new string(tmp);
+                string[] strNum = input.Split(oper.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
+                if (strNum.Length < 1 || strNum.Length > 2) throw new Exception("Неверное выражение");
+                if (oper != "<" && oper != ">" && oper != "<=" && oper != ">=" && oper != "==" && oper != "!=") 
+                    throw new Exception("Неверный оператор");
+
+                switch (oper)
+                {
+                    case "<": Console.WriteLine(int.Parse(strNum[0]) < int.Parse(strNum[1])); break;
+                    case ">": Console.WriteLine(int.Parse(strNum[0]) > int.Parse(strNum[1])); break;
+                    case "<=": Console.WriteLine(int.Parse(strNum[0]) <= int.Parse(strNum[1])); break;
+                    case ">=": Console.WriteLine(int.Parse(strNum[0]) >= int.Parse(strNum[1])); break;
+                    case "==": Console.WriteLine(int.Parse(strNum[0]) == int.Parse(strNum[1])); break;
+                    case "!=": Console.WriteLine(int.Parse(strNum[0]) != int.Parse(strNum[1])); break;
+                }
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+            }
 #endif
 
-#if false
+#if true
             /*
                 Задача 4: Дан массив целых произвольного размера. С клавиатуры вводится два числа -
                 порядковые номера элементов массива, которые необходимо суммировать. Обработать
@@ -109,7 +118,36 @@ namespace HW_8
                 используйте механизм исключений.
 
             */
+            int[] arr = { 10, 5, 3, 14, 8, 16, 44, 98, 7 };
+            try
+            {
+                Console.Write($"Введите первое число от 1 до {arr.Length}: ");
+                int firstNum = int.Parse(Console.ReadLine()) -1;
 
+                Console.Write($"Введите второе число от 1 до {arr.Length}: ");
+                int secondNum = int.Parse(Console.ReadLine()) -1;
+
+                Console.WriteLine($"{arr[firstNum]} + {arr[secondNum]} = {arr[firstNum] + arr[secondNum]}");
+            }
+            catch (FormatException e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+            }
+            catch (IndexOutOfRangeException e) 
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+            }
+            catch (OverflowException e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+            }
+            
 #endif
 
 
