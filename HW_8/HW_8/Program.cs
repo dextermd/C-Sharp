@@ -13,6 +13,14 @@ namespace HW_8
 {
     internal class Program
     {
+        static int JustEven(int num)
+        {
+            if (num % 2 != 0)
+                throw new MyException(num);
+
+            return num;
+        }
+
         static void Main(string[] args)
         {
 #if false
@@ -106,7 +114,7 @@ namespace HW_8
             }
 #endif
 
-#if true
+#if false
             /*
                 Задача 4: Дан массив целых произвольного размера. С клавиатуры вводится два числа -
                 порядковые номера элементов массива, которые необходимо суммировать. Обработать
@@ -151,7 +159,7 @@ namespace HW_8
 #endif
 
 
-#if false
+#if true
             /*
                 Задание 5: Написать приложение, которое позволяет вводить только четные числа для
                 заполнения массива с клавиатуры. Реализовать класс для специального исключения и при вводе
@@ -161,6 +169,35 @@ namespace HW_8
                 исключительную ситуацию и при обработке выводить их на экран отдельным цветом.
                 Продемонстрировать работу программы на заполненном массиве. 
             */
+
+            
+            Console.Write("Введите размер массива: ");
+            try
+            {
+                Console.Write("Введите размер массива: ");
+                int size = int.Parse(Console.ReadLine());
+                int[] arr = new int[size];  
+                for (int i = 0; i < size; i++)
+                {
+                    Console.Write($"Введите число номер {i + 1} для массива: ");
+                    int num = int.Parse(Console.ReadLine());
+                    JustEven(num);
+                    arr[i] = num;
+                }
+                
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (MyException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+
+
+
 
 #endif
             Console.ReadLine();
