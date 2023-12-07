@@ -16,8 +16,7 @@ namespace HW_8
         static int JustEven(int num)
         {
             if (num % 2 != 0)
-                throw new MyException(num);
-
+                throw new MyException("vvv", num);
             return num;
         }
 
@@ -159,7 +158,7 @@ namespace HW_8
 #endif
 
 
-#if true
+#if false
             /*
                 Задание 5: Написать приложение, которое позволяет вводить только четные числа для
                 заполнения массива с клавиатуры. Реализовать класс для специального исключения и при вводе
@@ -184,7 +183,6 @@ namespace HW_8
                     JustEven(num);
                     arr[i] = num;
                 }
-                
             }
             catch (FormatException ex)
             {
@@ -194,11 +192,6 @@ namespace HW_8
             {
                 Console.WriteLine(ex.Message);
             }
-            
-
-
-
-
 #endif
             Console.ReadLine();
         }
