@@ -20,7 +20,6 @@ namespace HW_7
         private static int[][] GradeFilter(int[][] gr) => gr?.Select(subGrades => subGrades.Where(n => n < 13 && n > 0).ToArray()).ToArray() ?? new int[0][];
         private static int[] GradeFilter(int[] gr) => gr?.Where(n => n < 13 && n > 0).ToArray() ?? new int[0];
         public DateTime Age { get => age; set => age = value; }
-
         public static int GetAge() 
         {
             DateTime today = DateTime.Today;
@@ -48,7 +47,6 @@ namespace HW_7
             age = obj.Age;
             vuz = obj.vuz;
             grades = obj.grades;
-
     }
         private string GetStringGrades()
         {
