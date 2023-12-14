@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Celsius.cs" />
+    <Compile Include="Fahrenheit.cs" />
+    <Compile Include="HoursWorked.cs" />
     <Compile Include="Matrix.cs" />
     <Compile Include="MyArray.cs" />
     <Compile Include="Program.cs" />

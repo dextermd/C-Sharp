@@ -12,7 +12,7 @@ namespace HW_10
     {
         static void Main(string[] args)
         {
-#if true
+#if false
             /*
                 Задание 1: Для уже существующего класса MyArray (делали на занятии) перегрузить оператор +
                 для конкатенации двух объектов класса, результат - другой массив. Также для этого класса
@@ -21,10 +21,25 @@ namespace HW_10
             */
 
             MyArray arr1 = new MyArray(5, 6, 8, 7, 9, 8, 2);
-            WriteLine($"arr1 = {arr1.Show}");
+            Write($"arr1 = ");
+            arr1.Show();
+
+            WriteLine();
 
             MyArray arr2 = new MyArray(10, 7, 3, 1, 1, 2, 4);
-            WriteLine($"arr2 = {arr2}");
+            Write($"arr2 = ");
+            arr2.Show();
+
+            WriteLine();
+
+            MyArray arr3 = new MyArray();
+            arr3 = arr1 + arr2;
+            Write($"arr3 = ");
+            arr3.Show();
+
+            double avg = arr3;
+            WriteLine();
+            WriteLine($"Average arr3 = {avg:F}");
 #endif
 
 #if false
@@ -36,6 +51,14 @@ namespace HW_10
                     Цельсий х 1,8 + 32 = Фаренгейт
                     (Фаренгейт — 32) : 1,8 = Цельсий
             */
+            Celsius celsius = new Celsius(36.6);
+            Fahrenheit fahrenheit = new Fahrenheit(90.1);
+
+            Fahrenheit f = celsius;
+            WriteLine($"Celsius {celsius} to Fahrenheit {f}");
+
+            Celsius c = fahrenheit;
+            WriteLine($"Fahrenheit {fahrenheit} to Celsius {c}");
 
 #endif
 
@@ -56,6 +79,11 @@ namespace HW_10
                         Четверг: 3,5
                         Всего часов: 12,5
             */
+            HoursWorked hoursWorked = new HoursWorked();
+            WriteLine(hoursWorked);
+            hoursWorked["Понедельник"] = 8.6;
+            hoursWorked["Пятница"] = 3.2;
+            WriteLine(hoursWorked);
 #endif
 
 #if false
@@ -67,6 +95,34 @@ namespace HW_10
                 диагонали и неквадратная матрица. В каждом случае выводить соответствующее сообщение
                 отдельным цветом.
             */
+
+            Matrix matrix = new Matrix(8,8);
+            matrix.Show();
+
+            WriteLine();
+
+            Random random = new Random();
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    matrix[i, j] = random.Next(100, 999);
+                }
+            }
+
+            matrix.Show();
+
+            try
+            {
+                WriteLine($"Max first = {matrix["first"]}");
+                WriteLine($"Max second = {matrix["second"]}");
+            }
+            catch (Exception e)
+            {
+                WriteLine(e.Message);
+            }
+
 #endif
             ReadLine();
         }

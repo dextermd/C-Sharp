@@ -50,10 +50,20 @@ namespace ls_10
                 }
                 arr[index] = value;
             }
-        }  
+        }
         public static MyArray operator +(MyArray objLeft, MyArray objRight)
         {
             return new MyArray() { arr = objLeft.arr.Concat(objRight.arr).ToArray() };
+        }
+        public static implicit operator double(MyArray obj)
+        {
+            //return obj.arr.Average();
+            double result = 0;
+            for (int i = 0;i < obj.arr.Length; i++)
+            {
+                result += obj.arr[i];
+            }
+            return (double)result / obj.arr.Length;
         }
     }
 }
