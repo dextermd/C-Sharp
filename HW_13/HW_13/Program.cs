@@ -11,7 +11,7 @@ namespace HW_13
         static void Main(string[] args)
         {
 
-#if true
+#if false
             //Задание 1: Реализовать класс «Книга» с характеристиками: Автор и Название.
             //В классе Книга описать внутренний класс Дополнительная Информация: Издательство, год
             //издания, Жанр, стоимость, количество.Опишите класс «Книжный магазин», в котором есть
@@ -60,27 +60,33 @@ namespace HW_13
             //простые.Используйте механизмы делегатов.
             //Также выведите массивы по всем критериям последовательно.Пример работы программы:
 
-            //1 20 - 3 4 5 6 199 - 8 9 - 10 277 - 12 13 14 15
-            //Четные числа:
-            //20 4 6 - 8 - 10 - 12 14
-            //Количество четных чисел в массиве: 7
-            //Нечетные числа:
-            //1 - 3 5 199 9 277 13 15
-            //Количество нечетных чисел в массиве: 8
-            //Простые числа:
-            //5 199 277 13
-            //Количество простых чисел в массиве: 4
-            //Числа больше нуля:
-            //            1 20 4 5 6 199 9 277 13 14 15
-            //Количество чисел больше нуля в массиве: 11
-            //Числа меньше нуля:
-            //            -3 - 8 - 10 - 12
-            //Количество чисел меньше нуля в массиве: 4
-            //===================================
-            //Result: 1 -3 5 199 9 277 13 15
-            //Result: 20 4 6 -8 -10 -12 14
-            //Result: 5 199 277 13
-            //Result: 1 20 4 5 6 199 
+            int[] arr = { 1, 20, -3, 4, 5, 6, 199, -8, 9, -10, 277, -12, 13, 14, 15 };
+
+            ArrWork arrWork = new ArrWork();
+            Console.WriteLine($"Четные числа: \n {arrWork.Show(arrWork.GetEven(arr))}");
+            Console.WriteLine($"Количество четных чисел в массиве: {arrWork.GetEvenCount(arr)}");
+            Console.WriteLine($"Нечетные числа: \n {arrWork.Show(arrWork.GetOdd(arr))}");
+            Console.WriteLine($"Количество нечетных чисел в массиве: {arrWork.GetOddCoun(arr)}");
+            Console.WriteLine($"Простые числа: \n{arrWork.Show(arrWork.GetPrime(arr))}");
+            Console.WriteLine($"Количество простых чисел в массиве: {arrWork.GetPrimeCount(arr)}");
+            Console.WriteLine($"Числа больше нуля: \n{arrWork.Show(arrWork.GreaterThanZero(arr))}");
+            Console.WriteLine($"Количество чисел больше нуля в массиве: {arrWork.GreaterThanZeroCount(arr)}");
+            Console.WriteLine($"Числа меньше нуля: \n{arrWork.Show(arrWork.LessThanZero(arr))}");
+            Console.WriteLine($"Количество чисел меньше нуля в массиве: {arrWork.LessThanZeroCount(arr)}");
+
+            Console.WriteLine("========================================");
+
+            ArrWorkDelegate arrWorkDelegate = null;
+            arrWorkDelegate = arrWork.GetEven;
+            arrWorkDelegate += new ArrWorkDelegate(arrWork.GetOdd);
+            arrWorkDelegate += new ArrWorkDelegate(arrWork.GetPrime);
+            arrWorkDelegate += new ArrWorkDelegate(arrWork.GreaterThanZero);
+            arrWorkDelegate += new ArrWorkDelegate(arrWork.LessThanZero);
+
+            foreach (ArrWorkDelegate item in arrWorkDelegate.GetInvocationList())
+            {
+                Console.WriteLine($"Result: {arrWork.Show(item(arr))}");
+            }
 #endif
             Console.ReadLine();
         }

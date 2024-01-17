@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrWork.cs" />
     <Compile Include="AuthorCompareDecr.cs" />
     <Compile Include="AuthorCompareIncr.cs" />
     <Compile Include="Book.cs" />
