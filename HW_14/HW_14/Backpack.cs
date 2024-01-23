@@ -6,42 +6,55 @@ using System.Threading.Tasks;
 
 namespace HW_14
 {
-    delegate void BackpackDelegate(object sender, CardArgs args);
     internal class Backpack
     {
-        public string Color { get; set; }
-        public string Manufacturer { get; set; }
-        public string Material { get; set; }
-        public double Weight { get; set; }
-        public double Volume { get; set; }
-        public List<Item> Contents { get; set; }
+        public string color { get; set; }
+        public string manufacturer { get; set; }
+        public string material { get; set; }
+        public double weight { get; set; }
+        public double volume { get; set; }
+        public List<Item> contents { get; set; }
+
+        public event EventHandler<BackpackEventArgs> BackpackAddItemEvent;
 
         public Backpack()
         {
-            Color = "No Color";
-            Manufacturer = "No Manufacturer";
-            Material = "No Material";
-            Weight = 0;
-            Volume = 0;
+            color = "No Color";
+            manufacturer = "No Manufacturer";
+            material = "No Material";
+            weight = 0;
+            volume = 0;
+            contents = new List<Item>();
         }
-        public Backpack(string color, string manufacturer, string material, double weight, double volume, List<Item> list)
+        public Backpack(string color, string manufacturer, string material, double weight, double volume)
         {
-            Color = color;
-            Manufacturer = manufacturer;
-            Material = material;
-            Weight = weight;
-            Volume = volume;
-            Contents = list;
+            this.color = color;
+            this.manufacturer = manufacturer;
+            this.material = material;
+            this.weight = weight;
+            this.volume = volume;
+        }
+        public void OnBackpackAddItemEvent(Item item)
+        {
+            BackpackEventArgs args = new BackpackEventArgs();
+
+            if (BackpackAddItemEvent != null)
+            {
+                args.name = item.name;
+                args.volume = item.volume;
+
+            }
+            BackpackAddItemEvent.Invoke(this, args);
         }
 
         public override string ToString()
         {
-            string contentsString = string.Join(", ", Contents.Select(item => $"{item.Name} ({item.Volume})"));
-            return $"Color          : {Color}\n" +
-                   $"Manufacturer   : {Manufacturer}\n" +
-                   $"Material       : {Material}\n" +
-                   $"Weight         : {Weight}\n" +
-                   $"Volume         : {Volume}\n" +
+            string contentsString = string.Join(", ", contents?.Select(item => $"{item?.name} ({item?.volume})") ?? Enumerable.Empty<string>());
+            return $"Color          : {color}\n" +
+                   $"Manufacturer   : {manufacturer}\n" +
+                   $"Material       : {material}\n" +
+                   $"Weight         : {weight}\n" +
+                   $"Volume         : {volume}\n" +
                    $"Contents       : {contentsString}";
         }
 

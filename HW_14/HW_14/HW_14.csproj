@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backpack.cs" />
+    <Compile Include="BackpackEventArgs.cs" />
     <Compile Include="CardArgs.cs" />
     <Compile Include="CreditCard.cs" />
     <Compile Include="Item.cs" />

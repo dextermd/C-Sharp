@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HW_14
 {
-    internal class CardArgs : EventArgs
+    internal class BackpackEventArgs : EventArgs
     {
-        public decimal summa;
-        public decimal balance;
+        public string name;
+        public double volume;
     }
 }

@@ -73,8 +73,8 @@ namespace HW_14
                 CardArgs args = new CardArgs();
                 if (SpendingEvent != null)
                 {
-                    args.Summa = sum;
-                    args.Balance = Balance;
+                    args.summa = sum;
+                    args.balance = Balance;
                     SpendingEvent?.Invoke(this, args);
                 }
             }
@@ -87,8 +87,8 @@ namespace HW_14
                 CardArgs args = new CardArgs();
                 if (TopUpEvent != null)
                 {
-                    args.Summa = sum;
-                    args.Balance = Balance;
+                    args.summa = sum;
+                    args.balance = Balance;
                     TopUpEvent?.Invoke(this, args);
                 }
             }

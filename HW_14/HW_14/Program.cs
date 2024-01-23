@@ -49,28 +49,36 @@ namespace HW_14
             //Реализуйте метод в качестве обработчика события добавления объекта.
             //Если при попытке добавления может быть превышен объём рюкзака, нужно генерировать исключение.
 
-            Item item1 = new Item("ItemOne", 2);
-            Item item2 = new Item("ItemTwo", 7);
-            List<Item> list = new List<Item>();
-            list.Add(item1);
-            list.Add(item2);
-            Backpack myBackpack = new Backpack("Blue", "BrandX", "Canvas", 1.5, 20, list);
+            Item item1 = new Item("Item One", 12);
+            Item item2 = new Item("Item Two", 2);
 
-            Console.WriteLine(myBackpack);
+            Console.WriteLine(item1);
+            Console.WriteLine(item2);
+
+            Console.WriteLine("\n-------------------------------------------\n");
+
+            Backpack myBackpack = new Backpack("Blue", "BrandX", "Canvas", 1.5, 20);
+
+            myBackpack.BackpackAddItemEvent += item1.ItemHandler;
+            myBackpack.BackpackAddItemEvent += item2.ItemHandler;
+
+            myBackpack.OnBackpackAddItemEvent(item1);
+            myBackpack.OnBackpackAddItemEvent(item2);
 #endif
             Console.ReadLine();
         }
+
         static void HandlePinChanged(string message)
         {
             Console.WriteLine(message);
         }
         static void HandleTopUp(object sender, CardArgs args)
         {
-            Console.WriteLine($"На счет поступило: {args.Summa} L. Сумма на счете:{args.Balance} L");
+            Console.WriteLine($"На счет поступило: {args.summa} L. Сумма на счете:{args.balance} L");
         }
         static void HandleSpending(object sender, CardArgs args)
         {
-            Console.WriteLine($"Со счета списано: {args.Summa} L. Сумма на счете:{args.Balance} L");
+            Console.WriteLine($"Со счета списано: {args.summa} L. Сумма на счете:{args.balance} L");
         }
     }
 }
