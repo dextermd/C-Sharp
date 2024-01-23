@@ -13,15 +13,17 @@ namespace HW_14
         public string name { get; set; }
         public double volume { get; set; }
 
-        public Item(string name, double volume)
-        {
-            this.name = name;
-            this.volume = volume;
-        }
+        public event EventHandler<BackpackEventArgs> AddItemEvent;
 
-        public void ItemHandler(object sender, BackpackEventArgs args)
+        public void OnAddItemEvent(string name, double volume)
         {
-            Console.WriteLine($"Добавлен: {args.name}, обьем: {args.volume}");
+            BackpackEventArgs args = new BackpackEventArgs();
+            if (AddItemEvent != null)
+            {
+                args.name = name;
+                args.volume = volume;
+                AddItemEvent(this, args);
+            }
         }
         public override string ToString()
         {

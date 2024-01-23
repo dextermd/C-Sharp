@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace HW_14
 {
@@ -14,8 +16,6 @@ namespace HW_14
         public double weight { get; set; }
         public double volume { get; set; }
         public List<Item> contents { get; set; }
-
-        public event EventHandler<BackpackEventArgs> BackpackAddItemEvent;
 
         public Backpack()
         {
@@ -33,24 +33,28 @@ namespace HW_14
             this.material = material;
             this.weight = weight;
             this.volume = volume;
+            contents = new List<Item>();
         }
-        public void OnBackpackAddItemEvent(Item item)
+        public void AddItemHandler(object sender, BackpackEventArgs args)
         {
-            BackpackEventArgs args = new BackpackEventArgs();
+            Item item = new Item();
+            item.name = args.name;
+            item.volume = args.volume;
 
-            if (BackpackAddItemEvent != null)
+            try
             {
-                args.name = item.name;
-                args.volume = item.volume;
-
+                AddItem(args.name, args.volume);
+                Console.WriteLine($"\nДобавили: {args.name} Объем: {args.volume}");
             }
-            BackpackAddItemEvent.Invoke(this, args);
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
         }
-
         public override string ToString()
         {
             string contentsString = string.Join(", ", contents?.Select(item => $"{item?.name} ({item?.volume})") ?? Enumerable.Empty<string>());
-            return $"Color          : {color}\n" +
+            return $"\nColor          : {color}\n" +
                    $"Manufacturer   : {manufacturer}\n" +
                    $"Material       : {material}\n" +
                    $"Weight         : {weight}\n" +
@@ -58,6 +62,22 @@ namespace HW_14
                    $"Contents       : {contentsString}";
         }
 
+        private void AddItem(string itemName, double itemVolume)
+        {
+            Item item = new Item();
+            item.name = itemName;
+            item.volume = itemVolume;
 
+            if (volume >= itemVolume)
+            {
+                contents.Add(item);
+                volume -= itemVolume;
+            }
+            else
+            {
+                string errorMessage = $"\nПредмет {itemName} с объемом {itemVolume} не помещается в рюкзак с объемом {volume}";
+                throw new ArgumentException(errorMessage);
+            }
+        }
     }
 }

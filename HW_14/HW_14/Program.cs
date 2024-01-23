@@ -35,7 +35,7 @@ namespace HW_14
 
 #endif
 
-#if true
+#if false
             //Задание 2: Создайте класс «Рюкзак». Характеристики рюкзака:
             //    − Цвет рюкзака;
             //    − Фирма производитель;
@@ -49,21 +49,29 @@ namespace HW_14
             //Реализуйте метод в качестве обработчика события добавления объекта.
             //Если при попытке добавления может быть превышен объём рюкзака, нужно генерировать исключение.
 
-            Item item1 = new Item("Item One", 12);
-            Item item2 = new Item("Item Two", 2);
+            Backpack backpack1 = new Backpack("Blue", "BrandX", "Canvas", 1.5, 20);
+            Backpack backpack2 = new Backpack("Red", "HPP", "FFFSA", 1.5, 9);
+            Backpack backpack3 = new Backpack("Green", "YYN", "HHSDS", 1.5, 20);
 
-            Console.WriteLine(item1);
-            Console.WriteLine(item2);
+            Console.WriteLine(backpack1);
+            Console.WriteLine(backpack2);
+            Console.WriteLine(backpack3);
 
             Console.WriteLine("\n-------------------------------------------\n");
 
-            Backpack myBackpack = new Backpack("Blue", "BrandX", "Canvas", 1.5, 20);
+            Item item = new Item();
 
-            myBackpack.BackpackAddItemEvent += item1.ItemHandler;
-            myBackpack.BackpackAddItemEvent += item2.ItemHandler;
+            item.AddItemEvent += backpack1.AddItemHandler;
+            item.AddItemEvent += backpack2.AddItemHandler;
+            item.AddItemEvent += backpack3.AddItemHandler;
 
-            myBackpack.OnBackpackAddItemEvent(item1);
-            myBackpack.OnBackpackAddItemEvent(item2);
+            item.OnAddItemEvent("Item1", 11);
+
+            Console.WriteLine("\n-------------------------------------------\n");
+
+            Console.WriteLine(backpack1);
+            Console.WriteLine(backpack2);
+            Console.WriteLine(backpack3);
 #endif
             Console.ReadLine();
         }
