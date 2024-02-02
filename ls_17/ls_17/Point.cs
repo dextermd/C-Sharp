@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ls_17
+namespace ls_10
 {
-    public partial class Point
+    public class Point
     {
         private int x; // Поле
         public int X  // Свойство
