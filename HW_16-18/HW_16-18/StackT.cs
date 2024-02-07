@@ -17,25 +17,43 @@ namespace HW_16_18
         {
             this.size = size;
             items = new T[this.size];
+            top = -1;
         }
 
         public T Pop()
         {
-            if (top > -1) 
-                return items[--top];
-            else Console.WriteLine("Stack is empty"); return default(T);
+            if (top == -1)
+            {
+                Console.WriteLine("Stack is empty"); 
+                return default(T);
+            }
+            return items[top--];
         }
-        public void Push(T data) { if (top < size) items[top++] = data; }
-
-        public void Peek()
+        public void Push(T item)
         {
-            if (top == 0)
+            if (top == items.Length - 1)
+                Console.WriteLine("Stack is full");
+            items[++top] = item;
+        }
+
+        public T Peek()
+        {
+            if (top == -1) { 
+                Console.WriteLine("Stack is empty"); 
+                return default(T); 
+            }
+            return items[top];
+        }
+
+        public void Show()
+        {
+            if (top == -1)
                 Console.WriteLine("Stack is empty");
 
-            for (int i = top - 1; i >  -1 ; i--)
+            for (int i = top; i >  -1 ; i--)
                 Console.WriteLine($"{items[i]}");
         }
-        public int GetCount() => top;
+        public int GetCount() => top + 1;
 
     }
 }
