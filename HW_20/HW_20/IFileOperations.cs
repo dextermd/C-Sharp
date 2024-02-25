@@ -12,11 +12,12 @@ namespace HW_20
         void WriteLogToFile(string path, string data, bool append);
         void ReadLineByLineFromFile(string path);
         void ReadLineFromFile(string path);
+        void ReadEvenLineFromFile(string path);
         void ReadAllFromFile(string path);
         void DeleteFile(string path);
         bool IsFileExist(string path);
-        string GetMessage(string message);
-        void Message(string message);
+        void Show(string message);
         void ReplaceWordFromFile(string path, string oldWord, string newWord, string pathLog);
+        (int, int, int, int) CountValueEvenOddTwoFiveDigit(string path);
     }
 }
